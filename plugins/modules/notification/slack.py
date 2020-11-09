@@ -49,6 +49,9 @@ options:
       - "WebAPI token:
         Slack WebAPI requires a personal, bot or work application token. These tokens start with C(xoxp-), C(xoxb-)
         or C(xoxa-), eg. C(xoxb-1234-56789abcdefghijklmnop). WebAPI token is required if you intend to receive thread_id.
+        To work with threads, the bot needs following Slack scopes: C(channels:history) and C(chat:write). Do not forget to
+        reinstall app after the scopes were added. Also the bot needs to be added to the channel, it can be done by 
+        writing in the needed channel C(@bot_name).
         See Slack's documentation (U(https://api.slack.com/docs/token-types)) for more information."
     required: true
   msg:
@@ -63,11 +66,11 @@ options:
       - Channel to send the message to. If absent, the message goes to the channel selected for the I(token).
   thread_id:
     description:
-      - Optional. Timestamp of parent message to thread this message. https://api.slack.com/docs/message-threading
+      - Optional. Timestamp of parent message to thread this message. Works only if C(token) has type C(WebAPI token). https://api.slack.com/docs/message-threading
     type: str
   message_id:
     description:
-      - Optional. Message ID to edit, instead of posting a new message.
+      - Optional. Message ID to edit, instead of posting a new message. Works only if C(token) has type C(WebAPI token).
         Corresponds to C(ts) in the Slack API (U(https://api.slack.com/messaging/modifying)).
     type: str
     version_added: 1.2.0
